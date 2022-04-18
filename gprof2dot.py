@@ -1168,6 +1168,8 @@ class GprofParser(Parser):
         r'^\s+called/total\s+parents\s*$|' +
         r'^index\s+%time\s+self\s+descendents\s+called\+self\s+name\s+index\s*$|' +
         r'^\s+called/total\s+children\s*$|' +
+        # Xtensa xt-gprof format
+        r'^index\s+%\s+self\s+children\s+called\s+name\s*$|' +
         # GNU gprof header
         r'^index\s+%\s+time\s+self\s+children\s+called\s+name\s*$'
     )
@@ -1175,6 +1177,8 @@ class GprofParser(Parser):
     _cg_ignore_re = re.compile(
         # spontaneous
         r'^\s+<spontaneous>\s*$|'
+        # xtensa gprof format (such as "  (K)    (K)")
+        r'^\s+\(K\)\s+\(K\)\s*$|'
         # internal calls (such as "mcount")
         r'^.*\((\d+)\)$'
     )
